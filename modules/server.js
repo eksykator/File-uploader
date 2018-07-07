@@ -1,14 +1,11 @@
 var http = require('http');
 var colors = require('colors');
-
-var handlers = require('./handlers'); //moduł
+var handlers = require('./handlers');
 
 function start() {
     function onRequest(request, response) {
         console.log("Odebrano zapytanie.".green);
         console.log("Zapytanie " + request.url + " odebrane.");
-        
-        response.writeHead(200, {"Content-Type": "text/plain; charset=utf-8"});
         
         switch (request.url) {
             case '/':
@@ -17,6 +14,12 @@ function start() {
                 break;
             case '/upload':
                 handlers.upload(request, response);
+                break;
+            case '/show':
+                handlers.show(request, response);
+                break;
+            case '/style.css':
+                handlers.style(request, response);
                 break;
             default:
                 handlers.error(request, response);
